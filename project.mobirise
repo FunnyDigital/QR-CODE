@@ -51,7 +51,8 @@
     "cookiesAlert": false,
     "gdpr": false,
     "witsec-white-label": true,
-    "witsec-jquery": false
+    "witsec-jquery": false,
+    "screenshot": "screenshot.png"
   },
   "pages": {
     "index.html": {
