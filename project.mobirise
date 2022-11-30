@@ -2289,37 +2289,64 @@
         {
           "alias": false,
           "_styles": {
+            "background-color": "@bgColor",
             "& when not (@fullScreen)": {
-              "padding-top": "(@paddingTop * 1rem)",
-              "padding-bottom": "(@paddingBottom * 1rem)"
+              "padding-top": "(@paddingTop * 15px)",
+              "padding-bottom": "(@paddingBottom * 15px)",
+              "#goDown": {
+                "visibility": "hidden"
+              }
             },
-            "& when (@bg-type = 'image')": {
-              "background-image": "url(@bg-value)"
+            "video, img": {
+              "position": "absolute",
+              "top": "50%",
+              "left": "50%",
+              "min-width": "100%",
+              "min-height": "100%",
+              "width": "auto",
+              "height": "auto",
+              "z-index": "0",
+              "-ms-transform": "translateX(-50%) translateY(-50%)",
+              "-moz-transform": "translateX(-50%) translateY(-50%)",
+              "-webkit-transform": "translateX(-50%) translateY(-50%)",
+              "transform": "translateX(-50%) translateY(-50%)"
             },
-            "& when (@bg-type = 'color')": {
-              "background-color": "@bg-value"
-            },
-            ".mbr-fallback-image.disabled": {
-              "display": "none"
-            },
-            ".mbr-fallback-image": {
-              "display": "block",
-              "background-size": "cover",
-              "background-position": "center center",
-              "width": "100%",
-              "height": "100%",
+            ".overlay": {
               "position": "absolute",
               "top": "0",
-              "& when (@bg-type = 'video')": {
-                "background-image": "url(@fallBackImage)"
+              "left": "0",
+              "width": "100%",
+              "height": "100%",
+              "background": "@overlayColor",
+              "opacity": "@overlayOpacity"
+            },
+            ".show": {
+              "visibility": "visible"
+            },
+            ".hide": {
+              "visibility": "hidden"
+            },
+            "& when not (@preview)": {
+              "video": {
+                "visibility": "hidden"
               }
+            },
+            "& when not (@overlay)": {
+              ".overlay": {
+                "background": "(@overlayColor * 0)",
+                "opacity": "(@overlayOpacity * 0)"
+              }
+            },
+            ".row": {
+              "padding-left": "5% !important",
+              "padding-right": "5% !important"
             }
           },
-          "_name": "header3",
+          "_name": "design-block",
+          "_customHTML": "<section data-bs-version=\"5.1\" group=\"Headers\" mbr-class=\"{'mbr-fullscreen': fullScreen}\" style=\"overflow: hidden;\">\n\n<mbr-parameters>\n<input type=\"checkbox\" title=\"Full Screen\" name=\"fullScreen\">\n<input type=\"range\" inline title=\"Top\" name=\"paddingTop\" min=\"5\" max=\"15\" step=\"1\" value=\"10\" condition=\"fullScreen == false\">\n<input type=\"range\" inline title=\"Bottom\" name=\"paddingBottom\" min=\"5\" max=\"15\" step=\"1\" value=\"10\" condition=\"fullScreen == false\">\n<input type=\"checkbox\" title=\"Show Title\" name=\"showTitle\">\n<input type=\"checkbox\" title=\"Show Subtitle\" name=\"showSubTitle\">\n<input type=\"checkbox\" title=\"Show Text\" name=\"showText\">\n<input type=\"checkbox\" title=\"Show Buttons\" name=\"showButtons\">\n<input type=\"checkbox\" title=\"Show Arrow\" name=\"showArrow\" condition=\"fullScreen == true\" checked>\n<input type=\"text\" title=\"Video URL\" name=\"iframeSrc\" value=\"https://vimeo.com/776490930\">\n<input type=\"checkbox\" title=\"Preview Video\" name=\"preview\" checked>\n<input type=\"checkbox\" title=\"Muted\" name=\"muted\" checked>\n<input type=\"checkbox\" title=\"Overlay\" name=\"overlay\">\n<input type=\"color\" title=\"Overlay Color\" name=\"overlayColor\" value=\"#9b59b6\" condition=\"overlay\">\n<input type=\"range\" inline title=\"Opacity\" name=\"overlayOpacity\" min=\"0\" max=\"0.9\" step=\"0.1\" value=\"0.4\" condition=\"overlay\">\n<input type=\"color\" title=\"Background Color\" name=\"bgColor\" value=\"#000000\">\n</mbr-parameters>\n\n<img mbr-class=\"{'hide': isPublish}\" src=\"https://res.cloudinary.com/ezenwa/image/upload/v1590745237/test-bars_yednyc.svg\" width=\"100%\" height=\"100%\">\n<video mbr-class=\"{'show': isPublish}\" width=\"100%\" height=\"100%\" playsinline=\"playsinline\" muted=\"{{muted}}\" controlslist=\"nodownload\" autoplay loop>\n<source src=\"{{iframeSrc}}\" type=\"video/mp4\">\n</video>\n\n<div class=\"overlay\"></div>\n\n<div class=\"container align-center\">\n<div class=\"row justify-content-md-center\">\n<div class=\"mbr-white col-md-10\">\n<h1 class=\"mbr-section-title mbr-bold pb-3 mbr-fonts-style\" mbr-theme-style=\"display-1\" mbr-if=\"showTitle\">PLANET EARTH</h1>\n<h3 class=\"mbr-section-subtitle align-center mbr-light pb-3 mbr-fonts-style\" mbr-theme-style=\"display-2\" mbr-if=\"showSubTitle\">Our home in the universe</h3>\n<p class=\"mbr-text pb-3 mbr-fonts-style\" mbr-theme-style=\"display-5\" mbr-if=\"showText\" data-app-selector=\".mbr-text, .mbr-section-btn\">With a radius of 3,959 miles, Earth is the fifth largest planet in our solar system, and it's the only one known for sure to have liquid water on its surface.</p>\n<div mbr-buttons mbr-theme-style=\"display-4\" class=\"mbr-section-btn\" mbr-if=\"showButtons\" data-toolbar=\"-mbrBtnMove\">\n<a class=\"btn btn-md btn-secondary\" href=\"https://mobirise.co\" data-app-placeholder=\"Type Text\">LEARN MORE</a>\n<a class=\"btn btn-md btn-white-outline\" href=\"https://mobirise.co\" data-app-placeholder=\"Type Text\">WATCH VIDEO</a>\n</div>\n</div>\n</div>\n</div>\n\n<div id=\"goDown\" mbr-if=\"showArrow\" class=\"mbr-arrow hidden-sm-down\" aria-hidden=\"true\">\n<a href=\"#next\">\n<i class=\"mbri-down mbr-iconfont\"></i>\n</a>\n</div>\n\n</section>",
+          "_cid": "mEFK9zpf78",
+          "_anchor": "design-block-mEFK9zpf78",
           "_sourceTheme": "mobirise5",
-          "_customHTML": "<section data-bs-version=\"5.1\" class=\"header3\" group=\"Headers\" data-bg-video=\"{{bg.type == 'video' && bg.value.url}}\" mbr-class=\"{\n    'mbr-fullscreen': fullScreen,\n    'mbr-parallax-background': bg.parallax}\">\n\n    <mbr-parameters>\n        <header>Size</header>\n        <input type=\"checkbox\" title=\"Full Screen\" name=\"fullScreen\" checked>\n        <input type=\"checkbox\" title=\"Full Width\" name=\"fullWidth\">\n        <input type=\"range\" inline title=\"Top\" name=\"paddingTop\" min=\"0\" max=\"10\" step=\"1\" value=\"5\" condition=\"fullScreen == false\">\n        <input type=\"range\" inline title=\"Bottom\" name=\"paddingBottom\" min=\"0\" max=\"10\" step=\"1\" value=\"5\" condition=\"fullScreen == false\">\n\n        <input type=\"range\" inline name=\"textWidth\" title=\"Width\" min=\"4\" max=\"12\" value=\"4\" step=\"1\">\n        <select title=\"Align\" name=\"contentAlign\">\n            <option value>Left</option>\n            <option value=\"justify-content-center\">Center</option>\n            <option value=\"justify-content-end\" selected>Right</option>\n        </select>\n        <header>Show/Hide</header>\n        <input type=\"checkbox\" title=\"Title\" name=\"showTitle\">\n        <input type=\"checkbox\" title=\"Subtitle\" name=\"showSubitle\">\n        <input type=\"checkbox\" title=\"Text\" name=\"showText\">\n        <input type=\"checkbox\" title=\"Buttons\" name=\"showButtons\">\n        <header>Background</header>\n        <fieldset type=\"background\" name=\"bg\" parallax>\n            <input type=\"image\" title=\"Image\" value=\"../_images/background11.jpg\">\n            <input type=\"color\" title=\"Color\" value=\"#ffffff\">\n            <input type=\"video\" title=\"Video\" value=\"https://vimeo.com/776490930\" selected>\n        </fieldset>\n        <header condition=\"bg.type === 'video'\">Fallback Image</header>\n        <input type=\"image\" title=\"Fallback Image\" value=\"../_images/background13.jpg\" name=\"fallBackImage\" condition=\"bg.type === 'video'\">\n        <input type=\"checkbox\" title=\"Overlay\" name=\"overlay\" condition=\"bg.type !== 'color'\" checked>\n        <input type=\"color\" title=\"Overlay Color\" name=\"overlayColor\" value=\"#ffffff\" condition=\"overlay && bg.type !== 'color'\">\n        <input type=\"range\" inline title=\"Opacity\" name=\"overlayOpacity\" min=\"0\" max=\"1\" step=\"0.1\" value=\"0\" condition=\"overlay && bg.type !== 'color'\">\n    </mbr-parameters>\n\n    <div class=\"mbr-fallback-image disabled\" mbr-if=\"bg.type == 'video'\"></div>\n    <div class=\"mbr-overlay\" mbr-if=\"overlay && bg.type !== 'color'\" opacity=\"{{overlayOpacity}}\" bg-color=\"{{overlayColor}}\"></div>\n\n    <div class=\"align-center\" mbr-class=\"{'container': !fullWidth, 'container-fluid': fullWidth}\">\n        <div class=\"row {{contentAlign}}\">\n            <div class=\"col-12 col-lg-{{textWidth}}\">\n                <h1 class=\"mbr-section-title mbr-fonts-style mb-3\" data-app-selector=\".mbr-section-title\" mbr-theme-style=\"display-1\" mbr-if=\"showTitle\"><b>Building a website</b></h1>\n                <h2 class=\"mbr-section-subtitle mbr-fonts-style mb-3\" data-app-selector=\".mbr-section-subtitle\" mbr-theme-style=\"display-2\" mbr-if=\"showSubitle\">Header Subtitle</h2>\n                <p class=\"mbr-text mbr-fonts-style\" mbr-theme-style=\"display-7\" mbr-if=\"showText\" data-app-selector=\".mbr-text, .mbr-section-btn\">For fast prototyping and small customers' projects.</p>\n                <div mbr-buttons mbr-theme-style=\"display-4\" class=\"mbr-section-btn mt-3\" mbr-if=\"showButtons\"><a class=\"btn btn-success\" href=\"https://mobiri.se\" data-app-placeholder=\"Type Text\">Free Download!</a></div>\n            </div>\n        </div>\n    </div>\n</section>",
-          "_cid": "toFHa8eDeE",
-          "_anchor": "header3-k3",
           "_protectedParams": [],
           "_global": false,
           "_once": false,
